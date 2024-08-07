@@ -8,7 +8,6 @@ import AddButton from './AddButton';
 const App: React.FC = () =>  {
   return (
     <div className="App">
-      <input />
       <AddButton />
     </div>
   );
