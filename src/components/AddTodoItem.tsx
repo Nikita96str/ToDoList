@@ -1,10 +1,13 @@
-import { useState } from "react"
+import React, { useRef, useState } from "react"
 import { ITodo } from "../types/data"
 import TodoList from "./TodoList";
+import { log } from "console";
 
-const AddButton: React.FC = () => {
+const AddTodoItem: React.FC = () => {
     const [todos, setTodos] = useState<ITodo[]>([]);
     const [inpValue, setInpValue] = useState('');
+
+    const inputRef = useRef(null);
 
     function addTodos() {
         if (inpValue) {
@@ -20,25 +23,29 @@ const AddButton: React.FC = () => {
         }
     }
 
-    enum paramObj {
-        p1 = 1,
-        p2,
-        p3,
+    const handlerChange: React.ChangeEventHandler<HTMLInputElement>  = e => {
+        console.log('e.target:', e.target);
+        console.log('e.target.value:', e.target.value);
+        setInpValue(e.target.value)
     }
 
     return (
         <div>
             <div>
-                <input value={inpValue} onChange={e => {
-                    console.log('e.target:', e.target);
-                    console.log('e.target.value:', e.target.value);
-                    setInpValue(e.target.value)
-                    }}/>
-                <button onClick={addTodos}>Add</button>
+                <input 
+                value={inpValue} 
+                onKeyDown={e => {
+                    if (e.key === 'Enter') 
+                        addTodos()
+                }} 
+                onChange={handlerChange}
+                ref={inputRef}
+                />
+                <button onClick={addTodos}> Add</button>
             </div>
             <TodoList items={todos} />
         </div>
     )
 }
 
-export default AddButton
+export default AddTodoItem
