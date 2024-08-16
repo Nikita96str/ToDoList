@@ -1,4 +1,5 @@
 import { ITodo } from "../types/data";
+import PopupWindow from "./PopupWindow";
 
 interface ITodoItem extends ITodo {
     removeTodo: (id: number) => void;
@@ -14,7 +15,8 @@ const TodoItem: React.FC<ITodoItem> = (props) => {
         checked={complete}
         onChange={() => toggleTodo(id)}
         />
-        {title}
+        <PopupWindow key={id} taskName={title} />
+        {/* {title} */}
         <button onClick={() => removeTodo(id)}> x</button>
     </div>
 }
