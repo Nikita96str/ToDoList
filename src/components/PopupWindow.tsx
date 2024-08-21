@@ -20,7 +20,10 @@ const PopupWindow: React.FC<popupProps> = (props) => {
             <main>
                 <button onClick={windowHandler}>{taskName}</button> 
             </main>
-            <Modal active={modalActive} setActive={setModalActive}/>
+            <Modal active={modalActive} 
+                setActive={setModalActive}
+                children={'Task: ' + taskName}
+            />
         </div>
             
     }
